@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "NODE_ENV=production forever start -a -l forever.log -o out.log -e err.log app.bukkit.js",
-    "stop": "forever stop app.bukkit.js"
+    "stop": "forever stop app.bukkit.js",
+    "start-dev": "node app.bukkit.js",
+    "makeXML": "node make.js"
   },
   "dependencies": {
     "express": "3.0.5",
