@@ -1,6 +1,5 @@
-console.log("running");
 
-(function RSSfile() {
+function makeRSS() {
 
 // make the rss feed
 	var cheerio = require('cheerio'),
@@ -82,6 +81,6 @@ console.log("running");
 		});
 
 	}
-})();
+}
 
-//exports.RSSfile = RSSfile;
+exports.now = makeRSS;

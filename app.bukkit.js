@@ -33,15 +33,15 @@ app.get('/', index.rss);
 app.get('/rss', index.rss);
 app.get('/rss.xml', index.rss);
 
-var fs = require('fs');                                                                        
-console.log("Watching savedRSS.xml");
-fs.watchFile('/home/yayadrian/webapps/bukkitrss/savedRSS.xml', function (curr, prev) {
-  /* console.log('the current mtime is: ' + curr.mtime);
-  console.log('the previous mtime was: ' + prev.mtime); */
-	console.log("xml file has changed");
-	rssXML = "";
-});
-
 http.createServer(app).listen(app.get('port'), function(){
 	console.log("Express server listening on port " + app.get('port'));
 });
+
+var makeRSS = require('./makeRSS.js');
+
+// Setup cron job to fetch latest XML
+var cronJob = require('cron').CronJob;
+new cronJob('0 * * * *', function(){
+    console.log('You will see this message every second');
+    makeRSS.now();
+}, null, true);
