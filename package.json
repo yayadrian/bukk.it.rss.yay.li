@@ -1,0 +1,18 @@
+{
+  "name": "bukkitRSS",
+  "version": "0.0.2",
+  "private": true,
+  "scripts": {
+    "start": "NODE_ENV=production forever start -a -l forever.log -o out.log -e err.log app.bukkit.js",
+    "stop": "forever stop app.bukkit.js"
+  },
+  "dependencies": {
+    "express": "3.0.5",
+    "ejs": "*",
+    "dateformatjs": "0.0.7",
+    "cron": "~1.0.1",
+    "jsdom": "*",
+    "request": "*",
+    "rss": "*"
+  }
+}
