@@ -1,5 +1,5 @@
 
-function makeRSS() {
+function makeRSS(callback) {
 
 // make the rss feed
 	var cheerio = require('cheerio'),
@@ -14,13 +14,13 @@ function makeRSS() {
 		var self = this;
 		self.items = {};
 			// check we got something good back
-		if(err && response.statusCode !== 200) { 
+		if(err && response.statusCode !== 200) {
 			console.log('Request error.');
 			return false;
 		}
 
 		$ = cheerio.load(body);
-		
+
 		/* lets create an rss feed */
 		var feed = new RSS({
 						title: 'bukk.it RSS',
@@ -46,8 +46,6 @@ function makeRSS() {
 			var fileSize = $(item).find('td:nth-child(4)').text();
 
 			if(fileName && fileURL && fileDate && fileSize ) {
-				// 
-				
 				var badHTML = '<h1>' + fileName + '</h1><img src="' + fileURL +'" /> <p>Size:' + fileSize + '</p>';
 				badHTML += '<a href="' + fileURL +'">' + fileURL + '</a>';
 				
@@ -66,20 +64,8 @@ function makeRSS() {
 			}
 		});
 		
-
-		var fs = require('fs');
-		var fileName = "savedRSS.xml";
-
-		fs.writeFile(fileName, feed.xml(), function(err) {
-			if(err) {
-				console.log(err);
-			} else {
-				console.log("The file was saved!");
-				var date = new Date();
-				console.log("File updated: " + date);
-			}
-		});
-
+		rssXML = feed.xml();
+		callback(rssXML);
 	}
 }
 

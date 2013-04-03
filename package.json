@@ -1,10 +1,9 @@
 {
   "name": "bukkitRSS",
-  "version": "0.0.2",
+  "version": "0.0.2-2",
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=production forever start -a -l forever.log -o out.log -e err.log app.bukkit.js",
-    "stop": "forever stop app.bukkit.js",
+    "start": "app.bukkit.js",
     "start-dev": "node app.bukkit.js",
     "makeXML": "node make.js"
   },
@@ -16,5 +15,9 @@
     "request": "*",
     "rss": "*",
     "cheerio": "~0.10.8"
-  }
+  },
+  "engines": {
+    "node": "0.8.x"
+  },
+  "subdomain": "bukkitrss"
 }

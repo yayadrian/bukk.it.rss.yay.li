@@ -7,11 +7,12 @@ var express = require('express')
 	, routes = require('./routes')
 	, index = require('./routes/index')
 	, http = require('http')
-	, path = require('path');
+	, path = require('path')
+	, makeRSS = require('./makeRSS.js');
 
 var app = express();
 
-rssXML = ""; // caching the rss file
+var rssXML = ""; // caching the rss file
 
 app.configure(function(){
 	app.set('port', process.env.PORT || 21067);
@@ -33,15 +34,21 @@ app.get('/', index.rss);
 app.get('/rss', index.rss);
 app.get('/rss.xml', index.rss);
 
+makeRSS.now(saveXML);
+
 http.createServer(app).listen(app.get('port'), function(){
 	console.log("Express server listening on port " + app.get('port'));
 });
 
-var makeRSS = require('./makeRSS.js');
+function saveXML(rssXML) {
+	console.log("SAVE XML");
+	rssXML = rssXML;
+}
 
 // Setup cron job to fetch latest XML
 var cronJob = require('cron').CronJob;
 new cronJob('0 * * * *', function(){
-    console.log('You will see this message every second');
-    makeRSS.now();
+    console.log('You will see this message every hour');
+    rssXML = makeRSS.now();
+    console.log("feed made");
 }, null, true);
