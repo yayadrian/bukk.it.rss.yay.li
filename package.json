@@ -1,6 +1,6 @@
 {
   "name": "bukkitRSS",
-  "version": "0.0.2-2",
+  "version": "0.0.2-4",
   "private": true,
   "scripts": {
     "start": "app.bukkit.js",
@@ -19,5 +19,8 @@
   "engines": {
     "node": "0.8.x"
   },
-  "subdomain": "bukkitrss"
+  "subdomain": "bukkitrss",
+  "domains": [
+    "bukk.it.rss.yay.li"
+  ]
 }
